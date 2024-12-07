@@ -1,0 +1,46 @@
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django specific
+*.log
+*.pot
+db.sqlite3
+media/
+static/
+
+# IDE/editor files
+.idea/
+.vscode/
+*.swp
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Test/coverage
+.tox/
+.nox/
+.coverage/
+coverage.xml
+*.cover
+*.hypothesis/
+
+# Build directories
+build/
+dist/
+*.egg-info/
+
+# Environment variable files
+.env
+.flaskenv
+
+# Python packaging
+Pipfile.lock
