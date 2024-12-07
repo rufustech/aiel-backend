@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,10 +26,7 @@ SECRET_KEY = 'django-insecure-nk6khedk%_ik%u0efcg!o(qh#@i@lgl9hzzn)g2&b8$evjift2
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['*.wildroseplacement.com', 
-'www.backend.wildroseplacement.com', 
-'wildroseALB-460792832.us-east-2.elb.amazonaws.com',
- '127.0.0.1', '172.31.0.171', '3.143.241.230', 'localhost']
+ALLOWED_HOSTS = ["*"]
 
 
 CORS_ALLOWED_ORIGINS = [
@@ -38,6 +35,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "http://localhost",
     "http://127.0.0.1",
+    "http://127.0.0.1:8000",
     "http://localhost:8080"
 ]
 
@@ -109,15 +107,15 @@ CSRF_TRUSTED_ORIGINS = ['http://localhost:3000','http://.127.0.0.1']
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'aiel_main_database',
-        'USER': 'postgres',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'aiel_main_database',
+#         'USER': 'postgres',
+#         'PASSWORD': 'admin',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }}
 
 
 # Password validation
@@ -156,6 +154,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 STATIC_URL = '/static/'
 
 
