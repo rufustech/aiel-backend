@@ -14,7 +14,7 @@ __pycache__/
 *.pot
 db.sqlite3
 media/
-static/
+# static/
 
 # IDE/editor files
 .idea/
