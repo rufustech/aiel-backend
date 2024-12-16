@@ -107,15 +107,16 @@ CSRF_TRUSTED_ORIGINS = ['http://localhost:3000','http://.127.0.0.1']
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'aiel_main_database',
-#         'USER': 'postgres',
-#         'PASSWORD': 'admin',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'aiel_main_database',
+        'USER': 'admin',
+        'PASSWORD': 'admin123',
+        'HOST': 'db',  # Should match the db service name in docker-compose
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
@@ -154,12 +155,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'static/'
 
+STATICFILES_DIRS = ( 
+    os.path.join(BASE_DIR, 'static'),
+    )
 
 # settings.py
-MEDIA_URL = '/media/'
+# MEDIA_URL = 'home/ubuntu/aiel-backend/media/'
+MEDIA_URL = 'app/aiel-backend/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 
 
