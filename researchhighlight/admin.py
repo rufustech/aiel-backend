@@ -1,17 +1,6 @@
 from django.contrib import admin
 from .models import ResearchHighlight
 from tinymce.widgets import TinyMCE
-from django.db import models
-
-class ResearchHighlightAdmin(admin.ModelAdmin):
-    formfield_overrides = {
-        models.TextField: {'widget': TinyMCE()},
-    }
-
-admin.site.register(ResearchHighlight, ResearchHighlightAdmin)
-from django.contrib import admin
-from .models import ResearchHighlight
-from tinymce.widgets import TinyMCE
 from django import forms
 
 class ResearchHighlightForm(forms.ModelForm):
@@ -24,17 +13,17 @@ class ResearchHighlightForm(forms.ModelForm):
 
 class ResearchHighlightAdmin(admin.ModelAdmin):
     form = ResearchHighlightForm
-    list_display = ('title', 'year', 'authors', 'created_at')
-    list_filter = ('year', 'created_at')
-    search_fields = ('title', 'authors', 'content')
+    list_display = ('title', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('title', 'author', 'content')
     ordering = ['-created_at']
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
         ('Basic Information', {
-            'fields': ('title', 'authors', 'year')
+            'fields': ('title', 'author')
         }),
         ('Content', {
-            'fields': ('content',)
+            'fields': ('description', 'content')
         }),
         ('Media', {
             'fields': ('image',)

@@ -1,17 +1,6 @@
 from django.contrib import admin
 from .models import LegalCommentary
 from tinymce.widgets import TinyMCE
-from django.db import models
-
-class LegalCommentaryAdmin(admin.ModelAdmin):
-    formfield_overrides = {
-        models.TextField: {'widget': TinyMCE()},
-    }
-
-admin.site.register(LegalCommentary, LegalCommentaryAdmin)
-from django.contrib import admin
-from .models import LegalCommentary
-from tinymce.widgets import TinyMCE
 from django import forms
 
 class LegalCommentaryForm(forms.ModelForm):
@@ -24,20 +13,17 @@ class LegalCommentaryForm(forms.ModelForm):
 
 class LegalCommentaryAdmin(admin.ModelAdmin):
     form = LegalCommentaryForm
-    list_display = ('title', 'year', 'authors', 'created_at')
-    list_filter = ('year', 'created_at')
-    search_fields = ('title', 'authors', 'content')
+    list_display = ('title', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('title', 'author', 'content')
     ordering = ['-created_at']
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
         ('Basic Information', {
-            'fields': ('title', 'authors', 'year')
+            'fields': ('title', 'author')
         }),
         ('Content', {
             'fields': ('content',)
-        }),
-        ('Media', {
-            'fields': ('image',)
         }),
         ('Metadata', {
             'fields': ('created_at', 'updated_at'),

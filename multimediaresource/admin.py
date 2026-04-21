@@ -1,36 +1,18 @@
 from django.contrib import admin
 from .models import MultimediaResource
 
-admin.site.register(MultimediaResource)
-from django.contrib import admin
-from .models import MultimediaResource
-from tinymce.widgets import TinyMCE
-from django import forms
-
-class MultimediaResourceForm(forms.ModelForm):
-    class Meta:
-        model = MultimediaResource
-        fields = '__all__'
-        widgets = {
-            'content': TinyMCE(attrs={'cols': 80, 'rows': 20}),
-        }
-
 class MultimediaResourceAdmin(admin.ModelAdmin):
-    form = MultimediaResourceForm
-    list_display = ('title', 'year', 'authors', 'created_at')
-    list_filter = ('year', 'created_at')
-    search_fields = ('title', 'authors', 'content')
+    list_display = ('title', 'resource_type', 'created_at')
+    list_filter = ('resource_type', 'created_at')
+    search_fields = ('title', 'description')
     ordering = ['-created_at']
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
         ('Basic Information', {
-            'fields': ('title', 'authors', 'year')
+            'fields': ('title', 'resource_type')
         }),
         ('Content', {
-            'fields': ('content',)
-        }),
-        ('Media', {
-            'fields': ('image',)
+            'fields': ('description', 'resource_url')
         }),
         ('Metadata', {
             'fields': ('created_at', 'updated_at'),
