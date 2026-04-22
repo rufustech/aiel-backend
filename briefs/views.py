@@ -9,8 +9,8 @@ class BriefViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title', 'authors', 'content']
-    ordering_fields = ['created_at', 'year']
-    ordering = ['-created_at']
+    ordering_fields = ['year', 'title']
+    ordering = ['-year']
 
     def get_queryset(self):
         """Filter by year"""
