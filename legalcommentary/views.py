@@ -9,7 +9,7 @@ class LegalCommentaryViewSet(viewsets.ModelViewSet):
     serializer_class = LegalCommentarySerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['title', 'content', 'author']
-    ordering_fields = ['created_at']
+    search_fields = ['title', 'content', 'authors']
+    ordering_fields = ['created_at', 'year']
     ordering = ['-created_at']
     

@@ -13,17 +13,17 @@ class ResearchHighlightForm(forms.ModelForm):
 
 class ResearchHighlightAdmin(admin.ModelAdmin):
     form = ResearchHighlightForm
-    list_display = ('title', 'created_at')
-    list_filter = ('created_at',)
-    search_fields = ('title', 'author', 'content')
+    list_display = ('title', 'year', 'created_at')
+    list_filter = ('year', 'created_at')
+    search_fields = ('title', 'authors', 'content')
     ordering = ['-created_at']
     readonly_fields = ('created_at', 'updated_at')
     fieldsets = (
         ('Basic Information', {
-            'fields': ('title', 'author')
+            'fields': ('title', 'year', 'authors')
         }),
         ('Content', {
-            'fields': ('description', 'content')
+            'fields': ('content',)
         }),
         ('Media', {
             'fields': ('image',)

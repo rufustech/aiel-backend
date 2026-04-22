@@ -1,9 +1,12 @@
 from django.db import models
+from tinymce.models import HTMLField
 
 class Newsletter(models.Model):
-    title = models.CharField(max_length=255)
-    content = models.TextField()
-    image = models.ImageField(upload_to='newsletter_images/', null=True, blank=True)
+    title = models.CharField(max_length=255, verbose_name="Newsletter Title")
+    content = HTMLField()
+    year = models.PositiveIntegerField(verbose_name="Year of Publication")
+    authors = models.TextField(verbose_name="Authors")
+    image = models.ImageField(upload_to='newsletter_images/', verbose_name="Image", null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     

@@ -9,7 +9,7 @@ class MultimediaResourceViewSet(viewsets.ModelViewSet):
     serializer_class = MultimediaResourceSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['title', 'description', 'resource_type']
-    ordering_fields = ['created_at']
+    search_fields = ['title', 'content', 'authors']
+    ordering_fields = ['created_at', 'year']
     ordering = ['-created_at']
     
