@@ -18,30 +18,38 @@ def clean_html_content(html_content):
     if not html_content:
         return ""
     
-    # Remove all data-* attributes (TinyMCE editor artifacts)
-    # This regex matches: data-attribute-name="value" or data-attribute-name='value' or data-attribute-name=value
-    # First pass: Remove data-* attributes with quoted values
-    cleaned = re.sub(
-        r'\s+data-[a-z-]+=["\'`][^\'">`]*["\'`]',
-        '',
-        html_content,
-        flags=re.IGNORECASE
-    )
-    
-    # Second pass: Remove any remaining data-* attributes without quotes
-    cleaned = re.sub(
-        r'\s+data-[a-z-]+=[^\s>]*',
-        '',
-        cleaned,
-        flags=re.IGNORECASE
-    )
-    
-    # Third pass: Remove any data-* attributes that span multiple lines or have escaped quotes
-    cleaned = re.sub(
-        r'\s+data-[a-z-]+[\s\n]*=[\s\n]*[^>]*?(?=[>\s])',
-        '',
-        cleaned,
-        flags=re.IGNORECASE | re.DOTALL
-    )
-    
-    return cleaned
+    try:
+        # Convert to string if not already
+        html_content = str(html_content)
+        
+        # Remove all data-* attributes (TinyMCE editor artifacts)
+        # This regex matches: data-attribute-name="value" or data-attribute-name='value' or data-attribute-name=value
+        # First pass: Remove data-* attributes with quoted values
+        cleaned = re.sub(
+            r'\s+data-[a-z-]+=["\'`][^\'">`]*["\'`]',
+            '',
+            html_content,
+            flags=re.IGNORECASE
+        )
+        
+        # Second pass: Remove any remaining data-* attributes without quotes
+        cleaned = re.sub(
+            r'\s+data-[a-z-]+=[^\s>]*',
+            '',
+            cleaned,
+            flags=re.IGNORECASE
+        )
+        
+        # Third pass: Remove any data-* attributes that span multiple lines or have escaped quotes
+        cleaned = re.sub(
+            r'\s+data-[a-z-]+[\s\n]*=[\s\n]*[^>]*?(?=[>\s])',
+            '',
+            cleaned,
+            flags=re.IGNORECASE | re.DOTALL
+        )
+        
+        return cleaned
+    except Exception as e:
+        # If cleaning fails, return original content
+        print(f"Error cleaning HTML content: {str(e)}")
+        return str(html_content)
