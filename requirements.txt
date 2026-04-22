@@ -26,6 +26,7 @@ django-tinymce
 djangorestframework
 djangorestframework-simplejwt
 djoser
+python-dotenv
 filelock
 frozenlist
 h11

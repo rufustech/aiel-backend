@@ -2,6 +2,12 @@
 venv/
 env/
 .venv/
+myenv/
+
+# Environment files (with secrets)
+.env
+.env.local
+.env.*.local
 
 # Python bytecode
 __pycache__/

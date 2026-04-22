@@ -6,6 +6,10 @@ Compatible with Django 3.2+ (and Django 5.x if you upgrade).
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # ------------------------------------------------------------------------------
 # Core paths
@@ -71,6 +75,10 @@ INSTALLED_APPS = [
     "videos",
     "cms",
 ]
+
+# Use BigAutoField for all models (Django 3.2+ default)
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
 MIDDLEWARE = [
     # CORS must be high in the list
     "corsheaders.middleware.CorsMiddleware",
