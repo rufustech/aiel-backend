@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Environment
 # ------------------------------------------------------------------------------
 DJANGO_ENV = os.environ.get("DJANGO_ENV", "dev").lower()  # 'prod' on the server
-DEBUG = os.environ.get("DJANGO_DEBUG", "true").lower() == "true"
+DEBUG = os.environ.get("DJANGO_DEBUG", "false").lower() == "true"
 
 # SECURITY: set this in your environment
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "CHANGE-ME-IN-ENV")
@@ -158,7 +158,11 @@ else:
     }
 
 # ------------------------------------------------------------------------------
-# REST Framework (your original choices)
+# REST Framework Configuration
+# - AllowAny as default (public API), specific viewsets override as needed
+# - Individual viewsets use IsAuthenticatedOrReadOnly for content
+# - Authentication classes support both session and basic auth
+# - Throttling prevents abuse of anonymous endpoints
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -166,10 +170,11 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.BasicAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",  # Default is public; viewsets override as needed
     ],
     "DEFAULT_THROTTLE_RATES": {
-        "anon": "5/min",
+        "anon": "100/hour",  # Allow reasonable traffic for public endpoints
+        "user": "1000/hour",
     },
 }
 

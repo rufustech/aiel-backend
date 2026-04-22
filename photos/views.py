@@ -1,4 +1,5 @@
 from rest_framework import viewsets, filters
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import Photo, PhotoGallery
 from .serializers import PhotoSerializer, PhotoGallerySerializer
 
@@ -6,6 +7,7 @@ from .serializers import PhotoSerializer, PhotoGallerySerializer
 class PhotoGalleryViewSet(viewsets.ModelViewSet):
     queryset = PhotoGallery.objects.all()
     serializer_class = PhotoGallerySerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title', 'description']
     ordering_fields = ['created_at', 'year']
@@ -13,6 +15,9 @@ class PhotoGalleryViewSet(viewsets.ModelViewSet):
 
 
 class PhotoViewSet(viewsets.ModelViewSet):
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Photo.objects.all()
     serializer_class = PhotoSerializer
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]

@@ -1,4 +1,5 @@
 from rest_framework import viewsets, filters
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import Video
 from .serializers import VideoSerializer
 
@@ -6,6 +7,7 @@ from .serializers import VideoSerializer
 class VideoViewSet(viewsets.ModelViewSet):
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title', 'speakers', 'description', 'tags']
     ordering_fields = ['created_at', 'year', 'views']

@@ -1,4 +1,5 @@
 from rest_framework import viewsets, filters
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .models import Podcast
 from .serializers import PodcastSerializer
 
@@ -6,6 +7,7 @@ from .serializers import PodcastSerializer
 class PodcastViewSet(viewsets.ModelViewSet):
     queryset = Podcast.objects.all()
     serializer_class = PodcastSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['title', 'show_name', 'host', 'guest_speakers', 'description', 'tags']
     ordering_fields = ['created_at', 'year', 'season', 'episode_number']
