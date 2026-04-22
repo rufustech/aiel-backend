@@ -5,4 +5,4 @@ from .models import Newsletter
 class NewsLetterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Newsletter
-        fields = '__all__'
+        fields = ['id', 'title', 'content', 'image', 'created_at', 'updated_at']
